@@ -15,10 +15,10 @@ public class Parser {
     private static final int ONE_ELEMENT_IN_LIST = 1;
     private static final String NOT_SYMBOL_REGEX = "[\\n\\t\\r]";
     private static final String START_OF_XML_FILE = "<\\?.*\\?>";
-    public static final char TAG_START = '<';
-    public static final char TAG_END = '>';
-    public static final char SPACE = ' ';
-    public static final char EQUAL = '=';
+    private static final char TAG_START = '<';
+    private static final char TAG_END = '>';
+    private static final char SPACE = ' ';
+    private static final char EQUAL = '=';
     private String path;
 
     public Parser() {
