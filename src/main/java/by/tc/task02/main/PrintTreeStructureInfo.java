@@ -13,15 +13,20 @@ class PrintTreeStructureInfo {
             System.out.println("tree is not found");
             return;
         }
+
         printAttributes(entity, level);
+
         if (entity.getChildren().size() == 0) {
-            //printText(entity);
             return;
         }
 
+        level++;
+        printChild(entity, level);
+    }
+
+    private static void printChild(Entity entity, int level) {
         List<String> text = new ArrayList<>();
-        for (Entity child : entity.getChildren())
-        {
+        for (Entity child : entity.getChildren()) {
             if (!child.getText().isEmpty()) {
                 text.add(child.getText());
             }
@@ -29,10 +34,7 @@ class PrintTreeStructureInfo {
 
         printText(text);
 
-        level++;
-
-        for (Entity child : entity.getChildren())
-        {
+        for (Entity child : entity.getChildren()) {
             print(child, level);
         }
     }
@@ -43,16 +45,13 @@ class PrintTreeStructureInfo {
         }
 
         System.out.print(text.get(0));
-
         if (text.size() == 1){
             return;
         }
-
         text.remove(0);
 
         for (String str: text) {
-            System.out.print(", ");
-            System.out.print(str);
+            System.out.print(", " + str);
         }
         System.out.println();
     }
@@ -62,9 +61,8 @@ class PrintTreeStructureInfo {
         if (attributes == null){
             return;
         }
-        for (int iterator = 0; iterator <= level; iterator++) {
-            System.out.print('\t');
-        }
+
+        addTabulation(level);
 
         Iterator key = attributes.keySet().iterator();
         String attribute = attributes.get(key.next().toString());
@@ -83,5 +81,11 @@ class PrintTreeStructureInfo {
             System.out.print(attribute);
         }
         System.out.print(". ");
+    }
+
+    private static void addTabulation(int level) {
+        for (int iterator = 0; iterator <= level; iterator++) {
+            System.out.print('\t');
+        }
     }
 }

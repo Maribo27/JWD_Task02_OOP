@@ -1,95 +1,28 @@
-package by.tc.task02.dao;
+package by.tc.task02.dao.parser;
 
 import by.tc.task02.entity.Entity;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
-public class Parser {
+public class StringParser {
     private static final int ONE_ELEMENT_IN_LIST = 1;
-    private static final String NOT_SYMBOL_REGEX = "[\\n\\t\\r]";
-    private static final String START_OF_XML_FILE = "<\\?.*\\?>";
     private static final char TAG_START = '<';
     private static final char TAG_END = '>';
     private static final char SPACE = ' ';
     private static final char EQUAL = '=';
-    private String path;
+    private static final String CLOSE_TAG_START = "</";
 
-    public Parser(URL fileURL) {
-        path = fileURL.getPath();
-    }
+    public StringParser() { }
 
-    public String fileToString(){
-        BufferedReader reader;
-        try {
-            path = path.replaceAll("%5b", "[");
-            path = path.replaceAll("%5d", "]");
-            reader = new BufferedReader(new FileReader(path));
+    public List<Entity> getChild(String partOfXMLDocument){
 
-            StringBuilder stringBuilder;
-            stringBuilder = new StringBuilder();
-
-            int c;
-            while ((c = reader.read()) != -1) {
-                stringBuilder.append((char) c);
-            }
-            String string;
-            string = stringBuilder.toString();
-            reader.close();
-            return getStringAfterConversion(string);
-        } catch (IOException e) {
-            System.exit(-1);
-            return null;
-        }
-    }
-
-    public Entity getEntity(String string){
-        Entity entity;
-        List<Entity> entities = getChild(string);
-        boolean wrongData;
-        wrongData = entities == null || entities.size() != 1;
-
-        if (wrongData){
-            entity = null;
-        } else {
-            entity = entities.get(0);
-        }
-        return entity;
-    }
-
-    private String getStringAfterConversion(String string) {
-        Pattern xmlStartPattern;
-        xmlStartPattern = Pattern.compile(START_OF_XML_FILE);
-
-        Pattern notSymbolRegex;
-        notSymbolRegex = Pattern.compile(NOT_SYMBOL_REGEX);
-
-        string = string.replaceAll(xmlStartPattern.toString(),"");
-        string = string.replaceAll(notSymbolRegex.toString(),"");
-
-        return string;
-    }
-
-    private List<Entity> getChild(String partOfXMLDocument){
-        List<Entity> children;
-        children = new ArrayList<>();
-
-        StringBuilder stringBuffer;
-        stringBuffer = new StringBuilder();
-
-        Entity entity;
-        entity = new Entity();
-
-        int substringStart;
-        substringStart = 0;
-
+        List<Entity> children = new ArrayList<>();
+        StringBuilder stringBuffer = new StringBuilder();
+        Entity entity = new Entity();
+        int substringStart = 0;
         int substringEnd;
 
         if (partOfXMLDocument.charAt(0) != TAG_START){
@@ -108,16 +41,12 @@ public class Parser {
             if (partOfXMLDocument.charAt(substringStart) == TAG_END) {
 
                 createEntityAttributes(stringBuffer, entity);
-                String close = "</" + entity.getElement() + ">";
-
-                substringEnd = partOfXMLDocument.indexOf(close,substringStart);
+                String closeTag = CLOSE_TAG_START + entity.getElement() + TAG_END;
+                substringEnd = partOfXMLDocument.indexOf(closeTag,substringStart);
                 substringStart++;
 
-                List<Entity> tempEntity;
-                tempEntity = getChild(partOfXMLDocument.substring(substringStart, substringEnd));
-                setEntityChild(partOfXMLDocument, entity, substringStart, substringEnd, tempEntity);
-                stringBuffer = new StringBuilder();
-                substringStart = substringEnd + close.length();
+                stringBuffer = createChild(partOfXMLDocument, entity, substringStart, substringEnd);
+                substringStart = substringEnd + closeTag.length();
                 children.add(entity);
                 continue;
             }
@@ -126,12 +55,17 @@ public class Parser {
         return children;
     }
 
-    private void setEntityChild(String string, Entity entity, int subStart, int subEnd, List<Entity> tempEntity) {
+    private StringBuilder createChild(String partOfXMLDocument, Entity entity, int substringStart, int substringEnd) {
+        StringBuilder stringBuffer;
+        String substring = partOfXMLDocument.substring(substringStart, substringEnd);
+        List<Entity> tempEntity = getChild(substring);
         if (tempEntity == null) {
-            entity.setText(string.substring(subStart, subEnd));
+            entity.setText(substring);
         } else {
             entity.setChildren(tempEntity);
         }
+        stringBuffer = new StringBuilder();
+        return stringBuffer;
     }
 
     private void createEntityAttributes(StringBuilder stringBuilder, Entity entity) {
