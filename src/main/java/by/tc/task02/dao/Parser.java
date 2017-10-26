@@ -2,6 +2,7 @@ package by.tc.task02.dao;
 
 import by.tc.task02.entity.Entity;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +22,11 @@ public class Parser {
     private static final char EQUAL = '=';
     private String path;
 
-    public Parser() {
-        path = this.getClass().getClassLoader().getResource("test2.xml").getPath();
+    public Parser(URL fileURL) {
+        path = fileURL.getPath();
     }
 
-    public void parse(){
+    public String fileToString(){
         BufferedReader reader;
         try {
             path = path.replaceAll("%5b", "[");
@@ -41,25 +42,26 @@ public class Parser {
             }
             String string;
             string = stringBuilder.toString();
-            string = getStringAfterConversion(string);
-
-            Entity entity;
-            List<Entity> entities = getChild(string);
-            boolean wrongData;
-            wrongData = entities == null || entities.size() != 1;
-
-            if (wrongData){
-                System.out.println("unknown error");
-            } else {
-                entity = entities.get(0);
-                System.out.println(entity.toString());
-            }
-
             reader.close();
+            return getStringAfterConversion(string);
         } catch (IOException e) {
             System.exit(-1);
+            return null;
         }
+    }
 
+    public Entity getEntity(String string){
+        Entity entity;
+        List<Entity> entities = getChild(string);
+        boolean wrongData;
+        wrongData = entities == null || entities.size() != 1;
+
+        if (wrongData){
+            entity = null;
+        } else {
+            entity = entities.get(0);
+        }
+        return entity;
     }
 
     private String getStringAfterConversion(String string) {
@@ -85,8 +87,6 @@ public class Parser {
         Entity entity;
         entity = new Entity();
 
-        List<String> attributes;
-
         int substringStart;
         substringStart = 0;
 
@@ -107,8 +107,8 @@ public class Parser {
 
             if (partOfXMLDocument.charAt(substringStart) == TAG_END) {
 
-                attributes = getListOfAttributes(stringBuffer, entity);
-                String close = "</" + attributes.get(0) + ">";
+                createEntityAttributes(stringBuffer, entity);
+                String close = "</" + entity.getElement() + ">";
 
                 substringEnd = partOfXMLDocument.indexOf(close,substringStart);
                 substringStart++;
@@ -128,23 +128,22 @@ public class Parser {
 
     private void setEntityChild(String string, Entity entity, int subStart, int subEnd, List<Entity> tempEntity) {
         if (tempEntity == null) {
-            entity.text = string.substring(subStart, subEnd);
+            entity.setText(string.substring(subStart, subEnd));
         } else {
-            entity.children.addAll(tempEntity);
+            entity.setChildren(tempEntity);
         }
     }
 
-    private List<String> getListOfAttributes(StringBuilder stringBuilder, Entity entity) {
+    private void createEntityAttributes(StringBuilder stringBuilder, Entity entity) {
         List<String> stringList;
         stringList = getStrings(stringBuilder.toString());
-        entity.element = stringList.get(0);
-        entity.attributes = getMap(stringList);
-        return stringList;
+        entity.setElement(stringList.get(0));
+        entity.setAttributes(getMap(stringList));
     }
 
     private void checkStringBuffer(StringBuilder stringBuilder, Entity entity) {
         if (!stringBuilder.toString().isEmpty()){
-            entity.text = stringBuilder.toString();
+            entity.setText(stringBuilder.toString());
         }
     }
 
@@ -156,15 +155,20 @@ public class Parser {
         attributes = new ArrayList<>();
 
         for (int charNumber = 0; charNumber < string.length(); charNumber++){
-            if (string.charAt(charNumber) == SPACE){
-                attributes.add(stringBuilder.toString());
-                stringBuilder = new StringBuilder();
-            } else {
-                stringBuilder.append(string.charAt(charNumber));
-            }
+            stringBuilder = getCharacterProcessingResult(string, stringBuilder, attributes, charNumber);
         }
         attributes.add(stringBuilder.toString());
         return attributes;
+    }
+
+    private StringBuilder getCharacterProcessingResult(String string, StringBuilder stringBuilder, List<String> attributes, int charNumber) {
+        if (string.charAt(charNumber) == SPACE){
+            attributes.add(stringBuilder.toString());
+            stringBuilder = new StringBuilder();
+        } else {
+            stringBuilder.append(string.charAt(charNumber));
+        }
+        return stringBuilder;
     }
 
     private Map<String, String> getMap(List<String> stringList){
