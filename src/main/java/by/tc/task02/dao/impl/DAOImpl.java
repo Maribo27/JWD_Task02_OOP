@@ -11,27 +11,38 @@ import java.util.List;
 public class DAOImpl implements DAO {
     @Override
     public Entity getRootEntity(URL fileURL) {
-        FileParser fileParser;
-        fileParser = new FileParser(fileURL);
+        FileParser fileParser = new FileParser(fileURL);
 
-        String fileString;
-        fileString = fileParser.fileToString();
+        String fileString = fileParser.fileToString();
         if (fileString == null){
             return null;
         }
 
-        StringParser stringParser;
-        stringParser = new StringParser();
+        StringParser stringParser = new StringParser();
 
-        List<Entity> entities;
-        entities = stringParser.getChild(fileString);
+        List<Entity> entities = stringParser.getChild(fileString);
 
         boolean wrongData;
         wrongData = entities == null || entities.size() != 1;
         if (wrongData){
             return null;
-        } else {
-            return entities.get(0);
         }
+
+        Entity entity = entities.get(0);
+
+        createTabulationLevel(entity, 0);
+        return entity;
+    }
+
+    private void createTabulationLevel(Entity entity, int level){
+        List<Entity> entities = entity.getChildren();
+        if (entities.size() == 0){
+            entity.setLevel(level);
+            return;
+        }
+        for (Entity child : entities){
+            createTabulationLevel(child, level + 1);
+        }
+        entity.setLevel(level);
     }
 }

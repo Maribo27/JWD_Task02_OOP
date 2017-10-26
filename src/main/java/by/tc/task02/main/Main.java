@@ -11,8 +11,8 @@ public class Main {
         ServiceFactory factory = ServiceFactory.getInstance();
         EntityService service = factory.getEntityService();
 
-        entity = service.getRootEntity("test1.xml");
+        entity = service.getRootEntity("test2.xml");
 
-        PrintTreeStructureInfo.print(entity, 0);
+        PrintTreeStructureInfo.print(entity);
     }
 }

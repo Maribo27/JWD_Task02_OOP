@@ -13,6 +13,7 @@ public class StringParser {
     private static final char TAG_END = '>';
     private static final char SPACE = ' ';
     private static final char EQUAL = '=';
+    private static final char CLOSE_TAG_END = '/';
     private static final String CLOSE_TAG_START = "</";
 
     public StringParser() { }
@@ -38,6 +39,15 @@ public class StringParser {
                 continue;
             }
 
+            boolean tagEnd = partOfXMLDocument.charAt(substringStart) == CLOSE_TAG_END && substringStart + 1 < partOfXMLDocument.length() && partOfXMLDocument.charAt(substringStart + 1) == TAG_END;
+            if (tagEnd) {
+
+                createEntityAttributes(stringBuffer, entity);
+                substringStart += 2;
+                children.add(entity);
+                continue;
+            }
+
             if (partOfXMLDocument.charAt(substringStart) == TAG_END) {
 
                 createEntityAttributes(stringBuffer, entity);
@@ -57,7 +67,7 @@ public class StringParser {
 
     private StringBuilder createChild(String partOfXMLDocument, Entity entity, int substringStart, int substringEnd) {
         StringBuilder stringBuffer;
-        String substring = partOfXMLDocument.substring(substringStart, substringEnd);
+        String substring = partOfXMLDocument.substring(substringStart, substringEnd).trim();
         List<Entity> tempEntity = getChild(substring);
         if (tempEntity == null) {
             entity.setText(substring);
@@ -116,7 +126,9 @@ public class StringParser {
         stringList.remove(0);
         for (String attribute: stringList) {
             int index = attribute.indexOf(EQUAL);
-            map.put(attribute.substring(0, index), attribute.substring(index + 1));
+            String attributeName = attribute.substring(0, index).trim();
+            String attributeValue = attribute.substring(index + 1).trim();
+            map.put(attributeName, attributeValue);
         }
         return map;
     }

@@ -8,11 +8,17 @@ import java.util.Map;
 
 public class Entity implements Serializable {
     private String element;
-    private Map<String, String> attributes = new HashMap<>();
-    private List<Entity> children = new ArrayList<>();
-    private String text = "";
+    private Map<String, String> attributes;
+    private List<Entity> children;
+    private String text;
+    private int level;
 
-    public Entity(){}
+    public Entity(){
+        element = "";
+        attributes = new HashMap<>();
+        children = new ArrayList<>();
+        text = "";
+    }
 
     public String getElement() {
         return element;
@@ -20,6 +26,14 @@ public class Entity implements Serializable {
 
     public void setElement(String element) {
         this.element = element;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public Map<String, String> getAttributes() {
@@ -47,18 +61,36 @@ public class Entity implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Entity entity = (Entity) o;
+
+        if (level != entity.level) return false;
+        if (element != null ? !element.equals(entity.element) : entity.element != null) return false;
+        if (attributes != null ? !attributes.equals(entity.attributes) : entity.attributes != null) return false;
+        if (children != null ? !children.equals(entity.children) : entity.children != null) return false;
+        return text != null ? text.equals(entity.text) : entity.text == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = element != null ? element.hashCode() : 0;
+        result = 31 * result + (attributes != null ? attributes.hashCode() : 0);
+        result = 31 * result + (children != null ? children.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + level;
+        return result;
+    }
+
+    @Override
     public String toString() {
-        String output;
-        output = "\nEntity: " + element + "\n\t";
-        if (attributes != null) {
-            output += "attributes: " + attributes + "\n\t";
-        }
-        if (children != null) {
-            output += "children: " + children + "\n\t";
-        }
-        if (!text.isEmpty()){
-            output += text;
-        }
-        return output;
+        return "Entity:" + "\n\t" +
+                "element='" + element + "\n\t" +
+                ", attributes=" + attributes + "\n\t" +
+                ", children=" + children + "\n\t" +
+                ", text='" + text + "\n\t" +
+                ", level=" + level + '\n';
     }
 }

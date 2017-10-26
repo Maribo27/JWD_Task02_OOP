@@ -1,14 +1,14 @@
 package by.tc.task02.dao.parser;
 
 import java.net.URL;
-import java.util.regex.Pattern;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class FileParser {
-    private static final String NOT_SYMBOL_REGEX = "[\\n\\t\\r]";
+    private static final String NOT_SYMBOL_REGEX = ">[\\s]+<";
     private static final String START_OF_XML_FILE = "<\\?.*\\?>";
+    private static final String COMMENT_LINE = "<!--.*-->";
     private String path;
 
     public FileParser(URL fileURL) {
@@ -40,14 +40,10 @@ public class FileParser {
     }
 
     private String getStringAfterConversion(String string) {
-        Pattern xmlStartPattern;
-        xmlStartPattern = Pattern.compile(START_OF_XML_FILE);
-
-        Pattern notSymbolRegex;
-        notSymbolRegex = Pattern.compile(NOT_SYMBOL_REGEX);
-
-        string = string.replaceAll(xmlStartPattern.toString(),"");
-        string = string.replaceAll(notSymbolRegex.toString(),"");
+        string = string.replaceAll(START_OF_XML_FILE,"");
+        string = string.replaceAll(COMMENT_LINE, "");
+        string = string.replaceAll(NOT_SYMBOL_REGEX,"><");
+        string = string.trim();
 
         return string;
     }
