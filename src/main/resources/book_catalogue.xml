@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<catalog>
+	<book id="1">
+		<title>XML Developer's Guide</title>
+		<author>
+			<name>Gambardella, Matthew</name>
+			<year>1975</year>
+		</author>
+		<genre>Computer</genre>
+		<price type="USD">44.95</price>
+		<publish_date>2000-10-01</publish_date>
+		<description>An in-depth look at creating applications with XML.</description>
+	</book>
+	<book id="2">
+		<title>Midnight Rain</title>
+		<author>
+			<name>Ralls, Kim</name>
+			<year>1958</year>
+		</author>
+		<genre>Fantasy</genre>
+		<price type="EUR">5.95</price>
+		<publish_date>2000-12-16</publish_date>
+		<description>A former architect battles corporate zombies, an evil sorceress, and her own childhood to become queen of the world.</description>
+	</book>
+	<book id="3">
+		<title>Maeve Ascendant</title>
+		<author>
+			<name>Corets, Eva</name>
+			<year>1968</year>
+		</author>
+		<genre>Fantasy</genre>
+		<price type="USD">5.95</price>
+		<publish_date>2000-11-17</publish_date>
+		<description>After the collapse of a nanotechnology society in England, the young survivors lay the foundation for a new society.</description>
+	</book>
+	<book id="4">
+		<title>Oberon's Legacy</title>
+		<author>
+			<name>Corets, Eva</name>
+			<year>1968</year>
+		</author>
+		<genre>Fantasy</genre>
+		<price type="USD">5.95</price>
+		<publish_date>2001-03-10</publish_date>
+		<description>In post-apocalypse England, the mysterious agent known only as Oberon helps to create a new life for the inhabitants of London. Sequel to Maeve Ascendant.</description>
+	</book>
+	<book id="5">
+		<title>The Sundered Grail</title>
+		<author>
+			<name>Corets, Eva</name>
+			<year>1968</year>
+		</author>
+		<genre>Fantasy</genre>
+		<price type="EUR">5.95</price>
+		<publish_date>2001-09-10</publish_date>
+		<description>The two daughters of Maeve, half-sisters, battle one another for control of England. Sequel to Oberon's Legacy.</description>
+	</book>
+	<book id="6">
+		<title>Lover Birds</title>
+		<author>
+			<name>Randall, Cynthia</name>
+			<year>1975</year>
+		</author>
+		<genre>Romance</genre>
+		<price type="EUR">4.95</price>
+		<publish_date>2000-09-02</publish_date>
+		<description>When Carla meets Paul at an ornithology conference, tempers fly as feathers get ruffled.</description>
+	</book>
+	<book id="7">
+		<title>Splish Splash</title>
+		<author>
+			<name>Thurman, Paula</name>
+			<year>1940</year>
+		</author>
+		<genre>Romance</genre>
+		<price type="USD">4.95</price>
+		<publish_date>1998-11-02</publish_date>
+		<description>A deep sea diver finds true love twenty thousand leagues beneath the sea.</description>
+	</book>
+	<book id="8">
+		<title>Creepy Crawlies</title>
+		<author>
+			<name>Knorr, Stefan</name>
+			<year>1975</year>
+		</author>
+		<genre>Horror</genre>
+		<price type="USD">4.95</price>
+		<publish_date>2010-12-06</publish_date>
+		<description>An anthology of horror stories about roaches, centipedes, scorpions  and other insects.</description>
+	</book>
+	<book id="9">
+		<title>Paradox Lost</title>
+		<author>
+			<name>Kress, Peter</name>
+			<year>1997</year>
+		</author>
+		<genre>Science Fiction</genre>
+		<price type="USD">6.95</price>
+		<publish_date>2017-11-02</publish_date>
+		<description>After an inadvertant trip through a Heisenberg Uncertainty Device, James Salway discovers the problems of being quantum.</description>
+	</book>
+	<book id="10">
+		<title>Microsoft .NET: The Programming Bible</title>
+		<author>
+			<name>O'Brien, Tim</name>
+			<year>1978</year>
+		</author>
+		<genre>Computer</genre>
+		<price type="USD">36.95</price>
+		<publish_date>2000-12-09</publish_date>
+		<description>Microsoft's .NET initiative is explored in detail in this deep programmer's reference.</description>
+	</book>
+	<book id="11">
+		<title>MSXML3: A Comprehensive Guide</title>
+		<author>
+			<name>O'Brien, Tim</name>
+			<year>1978</year>
+		</author>
+		<genre>Computer</genre>
+		<price type="BLR">36.95</price>
+		<publish_date>2000-12-01</publish_date>
+		<description>The Microsoft MSXML3 parser is covered in detail, with attention to XML DOM interfaces, XSLT processing, SAX and more.</description>
+	</book>
+	<book id="12">
+		<title>Visual Studio 7: A Comprehensive Guide</title>
+		<author>
+			<name>Galos, Mike</name>
+			<year>1969</year>
+		</author>
+		<genre>Computer</genre>
+		<price type="RUB">49.95</price>
+		<publish_date>2001-04-16</publish_date>
+		<description>Microsoft Visual Studio 7 is explored in depth, looking at how Visual Basic, Visual C++, C#, and ASP+ are integrated into a comprehensive development environment.</description>
+	</book>
+</catalog>

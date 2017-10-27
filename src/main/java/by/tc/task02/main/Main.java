@@ -2,6 +2,7 @@ package by.tc.task02.main;
 
 import by.tc.task02.entity.Entity;
 import by.tc.task02.service.EntityService;
+import by.tc.task02.service.ServiceException;
 import by.tc.task02.service.ServiceFactory;
 
 public class Main {
@@ -11,8 +12,14 @@ public class Main {
         ServiceFactory factory = ServiceFactory.getInstance();
         EntityService service = factory.getEntityService();
 
-        entity = service.getRootEntity("test2.xml");
+        try {
+            entity = service.getRootEntity("store.xml");
+            PrintTreeStructureInfo.print(entity);
+        } catch (ServiceException exception){
+            System.err.println(exception.getMessage());
+            System.exit(-1);
+        }
 
-        PrintTreeStructureInfo.print(entity);
+
     }
 }

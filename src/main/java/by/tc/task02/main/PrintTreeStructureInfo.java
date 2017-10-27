@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 class PrintTreeStructureInfo {
+
+    private static final char TAB = '\t';
+
     static void print(Entity entity) {
         if (entity == null){
-            System.out.println("tree is not found");
+            System.out.println("UNKNOWN ERROR");
             return;
         }
 
@@ -42,17 +45,17 @@ class PrintTreeStructureInfo {
 
     private static void printAttributes(Entity entity){
         Map<String, String> attributes = entity.getAttributes();
+
         if (attributes == null){
             return;
         }
+
         addTabulation(entity.getLevel());
 
         Iterator key = attributes.keySet().iterator();
         String attribute = attributes.get(key.next().toString());
         attribute = attribute.substring(1, attribute.length() - 1);
         System.out.print(attribute);
-
-
 
         while (key.hasNext()){
             System.out.print(", ");
@@ -67,7 +70,7 @@ class PrintTreeStructureInfo {
     private static void addTabulation(int level) {
         System.out.println();
         for (int iterator = 0; iterator <= level; iterator++) {
-            System.out.print('\t');
+            System.out.print(TAB);
         }
     }
 }

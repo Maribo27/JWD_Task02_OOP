@@ -1,0 +1,139 @@
+<?xml version="1.0" standalone="no"?>
+<catalog name="Store Catalogue">
+    <product_line name="Books">
+        <product id="bk0022" keywords="gardening, plants">
+            <name>Guide To Plants</name>
+            <description>
+                <paragraph> Everything you've ever wanted to know about plants. </paragraph>
+            </description>
+            <price>$12.99</price>
+            <quantity_in_stock>4</quantity_in_stock>
+            <image format="gif" width="234" height="400" src="images/covers/plantsv1.gif">
+                <caption>
+                    <paragraph>This is the cover from the first edition.</paragraph>
+                </caption>
+            </image>
+            <onsale_date month="april" year="1999"> </onsale_date>
+            <shipping_info type="UPS" value="1.0" />
+        </product>
+        <product id="bk0023" keywords="gardening, plants">
+            <name>Guide To Plants, Volume 2</name>
+            <description>
+                <paragraph>Everything else you've ever wanted to know about plants.</paragraph>
+            </description>
+            <price>$12.99</price>
+            <quantity_in_stock>4</quantity_in_stock>
+            <image format="gif" width="234" height="400" src="images/covers/plantsv2.gif">
+                <caption>
+                    <paragraph>This is the cover from the first edition.</paragraph>
+                </caption>
+            </image>
+            <onsale_date month="april" year="2000"> </onsale_date>
+            <shipping_info type="UPS" value="1.0" />
+        </product>
+        <product id="bk0024" keywords="how-to, technology">
+            <name>The Genius's Guide to the 3rd Millenium</name>
+            <author>
+                <name>Christoph Minwich</name>
+            </author>
+            <description>
+                <paragraph>Learn to convert your replicator into a transporter..and other neat tricks.</paragraph>
+            </description>
+            <price>$59.95</price>
+            <quantity_in_stock>0</quantity_in_stock>
+            <image format="gif" width="234" height="400" src="images/covers/millenium.gif">
+                <paragraph>This is the cover from the first edition.</paragraph>
+            </image>
+            <onsale_date month="january" year="2001"> </onsale_date>
+            <shipping_info type="UPS" value="2.0" />
+        </product>
+        <product id="bk0025" keywords="how-to, art">
+            <name>Dryer Lint Art</name>
+            <description>
+                <paragraph>A new book about the new folk art that's catching on like wildfire.</paragraph>
+            </description>
+            <price>$5.95</price>
+            <quantity_in_stock>34</quantity_in_stock>
+            <image format="gif" width="200" height="200" src="images/covers/dryerart.gif">
+                <paragraph>This is the cover from the first edition.</paragraph>
+            </image>
+            <onsale_date month="november" year="1971"> </onsale_date>
+            <shipping_info type="UPS" value="1.5" />
+        </product>
+    </product_line>
+<product_line name="CDs">
+<product id="cd0023" keywords="music,easy listening,pets,dogs">
+    <name>Music for Dogs</name>
+    <description>
+        <paragraph>Keep your pets calm while you're away from the house! Each of the 15 tracks on this CD has been scientifically shown to relax pets of all kinds.</paragraph>
+    </description>
+    <price>$14.99</price>
+    <quantity_in_stock>50</quantity_in_stock>
+    <image format="gif" width="200" height="200" src="http://www.musicfordogs.com/images/cover.gif"> </image>
+    <onsale_date month="april" year="1999"> </onsale_date>
+    <clip format="mp3" length="2:12" size="1.6 Mb" src="http://www.musicfordogs.com/sounds/track1.mp3">
+        <title>Track 1: Fetching the Stick</title>
+        <description>
+            <paragraph>An exciting and playful melody.</paragraph>
+        </description>
+    </clip>
+    <shipping_info type="UPS" value="0.5" />
+</product>
+<product id="cd0024" keywords="music,easy listening">
+    <name>Just Singin' Along</name>
+    <description>
+        <paragraph>A lovely collection of songs that thewhole family can sing right along with.</paragraph>
+    </description>
+    <price>$10.00</price>
+    <quantity_in_stock>100</quantity_in_stock>
+    <onsale_date month="april" year="1999"> </onsale_date>
+    <shipping_info type="UPS" value="0.5" />
+</product>
+<product id="cd0025" keywords="music,folk">
+    <name>It's Dot Com Enough For Me: SongsFrom Silicon Somewhere</name>
+    <description>
+        <paragraph>A collection of the best folkmusic from Internet companies.</paragraph>
+    </description>
+    <price>$12.99</price>
+    <quantity_in_stock>4</quantity_in_stock>
+    <onsale_date month="april" year="2000"> </onsale_date>
+    <clip format="mp3" length="4.32" size="4.0 Mb" src="track2.mp3">
+        <title>Track 2: My B2B is B-R-O-K-E</title>
+    </clip>
+    <shipping_info type="UPS" value="0.5" />
+</product>
+</product_line>
+        <!-- end CDs product line -->
+        <!-- begin Widgets product line -->
+<product_line name="widgets">
+<product id="wg0026" keywords="appliance,electronics">
+    <name>ElectroThermal Oxidizer</name>
+    <description>
+        <paragraph>This amazing gizmo uses electricity to produce heat that can be used for oxidizationpurposes.</paragraph>
+    </description>
+    <price>$24.95</price>
+    <quantity_in_stock>10</quantity_in_stock>
+    <onsale_date month="april" year="1999"> </onsale_date>
+    <shipping_info type="UPS" value="12.0" />
+</product>
+<product id="wg0027" keywords="computing,electronics, input device">
+    <name>Percusive Interface Unit</name>
+    <description>
+        <paragraph>Communicate with your favorite electric calculating machine--through tapping!</paragraph>
+    </description>
+    <price>$109.99</price>
+    <quantity_in_stock>7</quantity_in_stock>
+    <onsale_date month="april" year="1999"> </onsale_date>
+    <shipping_info type="UPS" value="12.0" />
+</product>
+<product id="wg0028" keywords="outdoors"> <name>Umbrella</name>
+    <description>
+        <paragraph>Imagine going out into the rainand NOT getting wet! The amazing umbrellamakes it possible.</paragraph>
+    </description>
+    <price>$10.99</price>
+    <quantity_in_stock>7</quantity_in_stock>
+    <onsale_date month="april" year="1999"> </onsale_date>
+    <shipping_info type="UPS" value="10.0" />
+</product>
+</product_line>
+</catalog>
